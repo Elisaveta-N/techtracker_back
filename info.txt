@@ -1,0 +1,11 @@
+https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases-node-postgresql
+
+mkdir hello-prisma
+cd hello-prisma
+
+npm init -y
+npm install prisma --save-dev
+
+npx prisma
+npx prisma init --datasource-provider postgresql --output ../generated/prisma
+npx prisma generate
