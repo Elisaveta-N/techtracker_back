@@ -2,9 +2,9 @@
   "name": "lesson01",
   "version": "1.0.0",
   "description": "Node.js Express tutorial",
-  "main": "server.js",
+  "main": "export.js",
   "scripts": {
-    "start": "node server",
+    "start": "node export",
     "dev": "nodemon server"
   },
   "author": "Dave Gray",

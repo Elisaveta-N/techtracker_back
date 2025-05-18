@@ -22,10 +22,54 @@ model User{
   roles Role[] @default([USER])
 }
 
+model Employee{
+  id Int @id @default(autoincrement())
+  firstName String
+  lastName String
+  asset Asset[]
+  department Department @relation(fields: [departmentId], references: [id])
+  departmentId Int
+}
+
+
+
+model Department{
+  id Int @id @default(autoincrement())
+  depName String
+  employee Employee[]
+
+}
+
+model Asset{
+  id Int @id @default(autoincrement())
+  assetModel String
+  employee Employee? @relation(fields: [employeeId], references: [id])
+  employeeId Int?
+  assetType AssetType
+  assetSN String?
+  assetStatus AssetStatus @default(inStock)
+}
+
 enum Role {
-  USER
-  EDITOR
   ADMIN
+  USER
+  MANAGER
+  ACCOUNTANT
+}
+
+enum AssetType {
+  computer
+  smartphone
+  dockstation
+  laptop
+  monitor
+}
+
+enum AssetStatus {
+  inOperation
+  inRepaire
+  inStock
+  writeOff
 }
 
 
