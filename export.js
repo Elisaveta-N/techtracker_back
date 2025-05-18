@@ -77,7 +77,7 @@ function generateSN() {
   return sn;
 }
 
-function generateAssets() {
+function generateAssets(batchSize) {
   const nomenclature = [
     {
       assetType: "computer",
@@ -97,7 +97,7 @@ function generateAssets() {
     },
     {
       assetType: "smartphone",
-      assetModel: "AOC Professional 27P2Q",
+      assetModel: "Xiaomi Redmi Note 14 Pro",
     },
   ];
 
@@ -105,13 +105,12 @@ function generateAssets() {
   let id = 0
 
   nomenclature.forEach(item => {
-    for(let i=0; i<2; ++i){
+    for(let i=0; i<batchSize; ++i){
         const sn = generateSN()
         const row = 
         {
             id: id++,
             assetModel: item.assetModel,
-            employee: null,
             employeeId: null,
             assetType: item.assetType,
             assetSN: sn,
@@ -124,6 +123,15 @@ function generateAssets() {
   return data
 }
 
+const initAssetData = generateAssets(2)
+const initAssetDataPath = path.join(__dirname, 'SeedData', 'initAssetsData.json');
 
+fs.writeFile(initAssetDataPath, JSON.stringify(initAssetData, null, 2)).then(
+    () => {
+        console.log('initAssetData generated')
+        importData(initAssetDataPath, 'Asset').then(()=>{
+            console.log('importData done')
+        })
+    }
+);
 
-console.log(generateAssets());

@@ -1,0 +1,82 @@
+[
+  {
+    "id": 0,
+    "assetModel": "HP ProDesk 400 G7 MT",
+    "employeeId": null,
+    "assetType": "computer",
+    "assetSN": "NNR1S2UI15",
+    "assetStatus": "inStock"
+  },
+  {
+    "id": 1,
+    "assetModel": "HP ProDesk 400 G7 MT",
+    "employeeId": null,
+    "assetType": "computer",
+    "assetSN": "ZBW2SSA9MS",
+    "assetStatus": "inStock"
+  },
+  {
+    "id": 2,
+    "assetModel": "HP EliteBook 840 G10",
+    "employeeId": null,
+    "assetType": "laptop",
+    "assetSN": "Z2A52NQGI6",
+    "assetStatus": "inStock"
+  },
+  {
+    "id": 3,
+    "assetModel": "HP EliteBook 840 G10",
+    "employeeId": null,
+    "assetType": "laptop",
+    "assetSN": "GZUZF9CB9S",
+    "assetStatus": "inStock"
+  },
+  {
+    "id": 4,
+    "assetModel": "HP USB-C G5",
+    "employeeId": null,
+    "assetType": "dockstation",
+    "assetSN": "8ZQQECG25P",
+    "assetStatus": "inStock"
+  },
+  {
+    "id": 5,
+    "assetModel": "HP USB-C G5",
+    "employeeId": null,
+    "assetType": "dockstation",
+    "assetSN": "67IXCP58VQ",
+    "assetStatus": "inStock"
+  },
+  {
+    "id": 6,
+    "assetModel": "AOC Professional 27P2Q",
+    "employeeId": null,
+    "assetType": "monitor",
+    "assetSN": "KUW3B69DPW",
+    "assetStatus": "inStock"
+  },
+  {
+    "id": 7,
+    "assetModel": "AOC Professional 27P2Q",
+    "employeeId": null,
+    "assetType": "monitor",
+    "assetSN": "UK049PAV6K",
+    "assetStatus": "inStock"
+  },
+  {
+    "id": 8,
+    "assetModel": "Xiaomi Redmi Note 14 Pro",
+    "employeeId": null,
+    "assetType": "smartphone",
+    "assetSN": "LUW0APAOR3",
+    "assetStatus": "inStock"
+  },
+  {
+    "id": 9,
+    "assetModel": "Xiaomi Redmi Note 14 Pro",
+    "employeeId": null,
+    "assetType": "smartphone",
+    "assetSN": "2PUAGF1FV9",
+    "assetStatus": "inStock"
+  }
+]
