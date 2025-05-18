@@ -67,8 +67,8 @@ async function exportTables(folderPath, tableNames) {
 }
 
 function generateSN() {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-  let sn = '';
+  const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+  let sn = "";
 
   for (let i = 0; i < 10; i++) {
     sn += characters.charAt(Math.floor(Math.random() * characters.length));
@@ -101,37 +101,99 @@ function generateAssets(batchSize) {
     },
   ];
 
-  let data = []
-  let id = 0
+  let data = [];
+  let id = 0;
 
-  nomenclature.forEach(item => {
-    for(let i=0; i<batchSize; ++i){
-        const sn = generateSN()
-        const row = 
-        {
-            id: id++,
-            assetModel: item.assetModel,
-            employeeId: null,
-            assetType: item.assetType,
-            assetSN: sn,
-            assetStatus: 'inStock'
-        }
-        data.push(row)
+  nomenclature.forEach((item) => {
+    for (let i = 0; i < batchSize; ++i) {
+      const sn = generateSN();
+      const row = {
+        id: id++,
+        assetModel: item.assetModel,
+        employeeId: null,
+        assetType: item.assetType,
+        assetSN: sn,
+        assetStatus: "inStock",
+      };
+      data.push(row);
     }
-  })
+  });
 
-  return data
+  return data;
 }
 
-const initAssetData = generateAssets(2)
-const initAssetDataPath = path.join(__dirname, 'SeedData', 'initAssetsData.json');
-
-fs.writeFile(initAssetDataPath, JSON.stringify(initAssetData, null, 2)).then(
-    () => {
-        console.log('initAssetData generated')
-        importData(initAssetDataPath, 'Asset').then(()=>{
-            console.log('importData done')
-        })
-    }
+const initAssetData = generateAssets(2);
+const initAssetDataPath = path.join(
+  __dirname,
+  "SeedData",
+  "initAssetsData.json"
 );
 
+fs.writeFile(initAssetDataPath, JSON.stringify(initAssetData, null, 2)).then(
+  () => {
+    console.log("initAssetData generated");
+    importData(initAssetDataPath, "Asset").then(() => {
+      console.log("initAssetData import done");
+    });
+  }
+);
+
+const initDepartmentData = [
+  {
+    id: 1,
+    depName: "Отдел ИТ",
+  },
+  {
+    id: 2,
+    depName: "Бухгалтерия",
+  },
+  {
+    id: 3,
+    depName: "Отдел Снабжения",
+  },
+];
+const initDepartmentDataPath = path.join(
+  __dirname,
+  "SeedData",
+  "initDepartmentData.json"
+);
+
+fs.writeFile(initDepartmentDataPath, JSON.stringify(initDepartmentData, null, 2)).then(
+  () => {
+    console.log("initDepartmentData generated");
+    importData(initDepartmentDataPath, "Department").then(() => {
+      console.log("initDepartmentData import done");
+    });
+  }
+);
+
+
+const initEmployeeData = [
+  {
+    id: 1,
+    firstName: 'Петр',
+    lastName: 'Смирнов',
+    departmentId: 1
+  },
+  {
+    id: 2,
+    firstName: 'Дмитрий',
+    lastName: 'Волков',
+    departmentId: 1
+  },
+];
+
+const initEmployeeDataPath = path.join(
+  __dirname,
+  "SeedData",
+  "initEmployeeData.json"
+);
+
+fs.writeFile(initEmployeeDataPath, JSON.stringify(initEmployeeData, null, 2)).then(
+  () => {
+    console.log("initEmployeeData generated");
+    importData(initEmployeeDataPath, "Employee").then(() => {
+      console.log("initEmployeeData import done");
+    });
+  }
+);

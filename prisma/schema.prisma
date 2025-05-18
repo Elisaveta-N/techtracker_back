@@ -31,13 +31,10 @@ model Employee{
   departmentId Int
 }
 
-
-
 model Department{
   id Int @id @default(autoincrement())
   depName String
   employee Employee[]
-
 }
 
 model Asset{
