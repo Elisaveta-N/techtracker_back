@@ -6,7 +6,7 @@ const getEmployeeById = async function (req, res) {
     if (isNaN(id)){
         return res.status(400).json({message: 'Employee id should be a number'})
     }
-    const dbRes = await getEmployee({id})
+    const dbRes = await getEmployee({where: {id}})
     if(dbRes === null) {
         return res.status(400).json({ "message": `Employee ID ${id} not found` });
     }
@@ -18,7 +18,7 @@ const getEmployeeByDepartmentId = async function (req, res) {
     if (isNaN(id)){
         return res.status(400).json({message: 'Department id should be a number'})
     }
-    const dbRes = await getEmployees({departmentId: id})
+    const dbRes = await getEmployees({where: {departmentId: id}})
     if(dbRes === null) {
         return res.status(400).json({ "message": `Employees for department ID ${id} not found` });
     }

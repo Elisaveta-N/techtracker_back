@@ -4,7 +4,7 @@
     "assetModel": "HP ProDesk 400 G7 MT",
     "employeeId": null,
     "assetType": "computer",
-    "assetSN": "EUGWR768K3",
+    "assetSN": "MMAD2ZX5LX",
     "assetStatus": "inStock"
   },
   {
@@ -12,7 +12,7 @@
     "assetModel": "HP ProDesk 400 G7 MT",
     "employeeId": null,
     "assetType": "computer",
-    "assetSN": "PMP1TP6AWD",
+    "assetSN": "D9G6W6CLYN",
     "assetStatus": "inStock"
   },
   {
@@ -20,7 +20,7 @@
     "assetModel": "HP EliteBook 840 G10",
     "employeeId": null,
     "assetType": "laptop",
-    "assetSN": "KGS7UMKFCS",
+    "assetSN": "F3EN34KD59",
     "assetStatus": "inStock"
   },
   {
@@ -28,7 +28,7 @@
     "assetModel": "HP EliteBook 840 G10",
     "employeeId": null,
     "assetType": "laptop",
-    "assetSN": "LMLC11KVQI",
+    "assetSN": "K1QH4DS0MM",
     "assetStatus": "inStock"
   },
   {
@@ -36,7 +36,7 @@
     "assetModel": "HP USB-C G5",
     "employeeId": null,
     "assetType": "dockstation",
-    "assetSN": "J5QIJXI168",
+    "assetSN": "V6471X5VRT",
     "assetStatus": "inStock"
   },
   {
@@ -44,7 +44,7 @@
     "assetModel": "HP USB-C G5",
     "employeeId": null,
     "assetType": "dockstation",
-    "assetSN": "HYH6ETC5H6",
+    "assetSN": "ZQFEGO1GFK",
     "assetStatus": "inStock"
   },
   {
@@ -52,7 +52,7 @@
     "assetModel": "AOC Professional 27P2Q",
     "employeeId": null,
     "assetType": "monitor",
-    "assetSN": "5IJ4UTEZQW",
+    "assetSN": "CKBZ0ZGB28",
     "assetStatus": "inStock"
   },
   {
@@ -60,7 +60,7 @@
     "assetModel": "AOC Professional 27P2Q",
     "employeeId": null,
     "assetType": "monitor",
-    "assetSN": "FT3ACAQTLE",
+    "assetSN": "R96LH3J66Z",
     "assetStatus": "inStock"
   },
   {
@@ -68,7 +68,7 @@
     "assetModel": "Xiaomi Redmi Note 14 Pro",
     "employeeId": null,
     "assetType": "smartphone",
-    "assetSN": "TY7ATTJSQZ",
+    "assetSN": "ALQWFMB8MO",
     "assetStatus": "inStock"
   },
   {
@@ -76,7 +76,7 @@
     "assetModel": "Xiaomi Redmi Note 14 Pro",
     "employeeId": null,
     "assetType": "smartphone",
-    "assetSN": "YRFFIQYELR",
+    "assetSN": "ITP7F39DHU",
     "assetStatus": "inStock"
   }
 ]

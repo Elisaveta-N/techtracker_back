@@ -46,6 +46,8 @@ app.use('/refresh', require('./routes/refresh'))
 app.use('/logout', require('./routes/logout'))
 
 app.use('/employee', require('./routes/employee'))
+app.use('/asset', require('./routes/asset'))
+app.use('/test', require('./routes/test'))
 
 
 
