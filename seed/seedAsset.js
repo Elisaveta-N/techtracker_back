@@ -39,6 +39,7 @@ function generateAssets(batchSize) {
         assetType: item.assetType,
         assetSN: sn,
         assetStatus: "inStock",
+        assetInvenrotyNumber: (1000000 + id).toString(),
       };
       data.push(row);
     }

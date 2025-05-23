@@ -45,6 +45,7 @@ model Asset{
   assetType AssetType
   assetSN String?
   assetStatus AssetStatus @default(inStock)
+  assetInvenrotyNumber String @unique
 }
 
 enum Role {
