@@ -61,24 +61,26 @@ const getAssets = async (condition) => {
 
 const createAsset = async (asset) => {
   try {
-    // const asset2 = {
-    //     "assetModel": "HP ProDesk 400 G7 MT",
+    const dbAsset = await prisma.asset.create({ data: asset });
 
-    //     "assetType": "computer",
-    //     "assetSN": "TURU1Z6ARQ",
-    //     "assetStatus": "inStock",
-    //     "assetInvenrotyNumber": "kjesdghfidshgfi"
-    // }
-    const dbAssets = await prisma.asset.create({ data: asset });
-
-    if (dbAssets === null) {
-      return null;
+    if (dbAsset === null) {
+      return reportStatus(500, { message: "Something went wrong, couldn't create an asset" });
     }
-    return reportStatus(201, dbAssets);
+    return reportStatus(201, dbAsset);
   } catch (err) {
     console.log("createAsset error: " + err.message);
     return reportStatus(500, { message: err.message });
   }
 };
 
-module.exports = { getAssets, getAsset, createAsset};
+const patchAsset = async (asset) => {
+  try {
+    const dbAsset = await prisma.asset.update({where: {id: asset.id,}, data: asset,});
+    return reportStatus(200, dbAsset);
+  } catch (err) {
+    console.log("patchAsset error: " + err.message);
+    return reportStatus(500, { message: err.message });
+  }
+};
+
+module.exports = { getAssets, getAsset, createAsset, patchAsset};

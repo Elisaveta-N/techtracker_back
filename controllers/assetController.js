@@ -1,4 +1,4 @@
-const { getAssets, getAsset, createAsset } = require("../repo/asset");
+const { getAssets, getAsset, createAsset, patchAsset } = require("../repo/asset");
 const {getEmployees, getEmployee} = require('../repo/employee')
 
 const getAssetById = async function (req, res) {
@@ -71,4 +71,25 @@ const postAsset = async function (req, res) {
   return res.status(dbRes.code).json(dbRes.data);
 };
 
-module.exports = { getAssetById, getAssetByEmployeeId, getAllAssets, getAssetByDepartmentId, postAsset};
+const changeAsset = async function (req, res) {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    return res.status(400).json({ message: "Asset id should be a number" });
+  }
+
+  let dbRes = await getAsset({where: { id }});
+  if (dbRes === null) {
+    return res.status(400).json({ message: `Asset ID ${id} not found` });
+  }
+
+  let asset = req.body.asset;
+  if(asset === null) {
+    return res.status(400).json({ message: `Assets not specified` });
+  }
+
+  asset.id = id
+  dbRes = await patchAsset(asset);
+  return res.status(dbRes.code).json(dbRes.data);
+};
+
+module.exports = { getAssetById, getAssetByEmployeeId, getAllAssets, getAssetByDepartmentId, postAsset, changeAsset};

@@ -4,15 +4,12 @@ const fs = require("fs/promises");
 
 const initDepartmentData = [
   {
-    // id: 1,
     depName: "Отдел ИТ",
   },
   {
-    // id: 2,
     depName: "Бухгалтерия",
   },
   {
-    // id: 3,
     depName: "Отдел Снабжения",
   },
 ];
