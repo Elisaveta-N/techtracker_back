@@ -33,7 +33,7 @@ model Employee{
 
 model Department{
   id Int @id @default(autoincrement())
-  depName String
+  depName String @unique
   employee Employee[]
 }
 
