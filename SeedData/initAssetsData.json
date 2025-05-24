@@ -1,92 +1,82 @@
 [
   {
-    "id": 1,
     "assetModel": "HP ProDesk 400 G7 MT",
     "employeeId": null,
     "assetType": "computer",
-    "assetSN": "SCJTAJ9AAQ",
+    "assetSN": "IMYNEA4S5P",
+    "assetStatus": "inStock",
+    "assetInvenrotyNumber": "1000001"
+  },
+  {
+    "assetModel": "HP ProDesk 400 G7 MT",
+    "employeeId": null,
+    "assetType": "computer",
+    "assetSN": "WLQZB81QEW",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000002"
   },
   {
-    "id": 2,
-    "assetModel": "HP ProDesk 400 G7 MT",
+    "assetModel": "HP EliteBook 840 G10",
     "employeeId": null,
-    "assetType": "computer",
-    "assetSN": "5IN1WI4EEW",
+    "assetType": "laptop",
+    "assetSN": "L0PZW6RUF2",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000003"
   },
   {
-    "id": 3,
     "assetModel": "HP EliteBook 840 G10",
     "employeeId": null,
     "assetType": "laptop",
-    "assetSN": "1EC4OO0S2W",
+    "assetSN": "EF2QNNM9Z5",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000004"
   },
   {
-    "id": 4,
-    "assetModel": "HP EliteBook 840 G10",
+    "assetModel": "HP USB-C G5",
     "employeeId": null,
-    "assetType": "laptop",
-    "assetSN": "O26R06PRL9",
+    "assetType": "dockstation",
+    "assetSN": "OMCIZ28LK1",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000005"
   },
   {
-    "id": 5,
     "assetModel": "HP USB-C G5",
     "employeeId": null,
     "assetType": "dockstation",
-    "assetSN": "YHAZA43474",
+    "assetSN": "ASZR77LBH6",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000006"
   },
   {
-    "id": 6,
-    "assetModel": "HP USB-C G5",
+    "assetModel": "AOC Professional 27P2Q",
     "employeeId": null,
-    "assetType": "dockstation",
-    "assetSN": "3AFTUUX26J",
+    "assetType": "monitor",
+    "assetSN": "6D7ERF2TA5",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000007"
   },
   {
-    "id": 7,
     "assetModel": "AOC Professional 27P2Q",
     "employeeId": null,
     "assetType": "monitor",
-    "assetSN": "MCDNBY6A71",
+    "assetSN": "G14VTIO15W",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000008"
   },
   {
-    "id": 8,
-    "assetModel": "AOC Professional 27P2Q",
+    "assetModel": "Xiaomi Redmi Note 14 Pro",
     "employeeId": null,
-    "assetType": "monitor",
-    "assetSN": "WTE33NVX09",
+    "assetType": "smartphone",
+    "assetSN": "PS4U7P72ML",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000009"
   },
   {
-    "id": 9,
     "assetModel": "Xiaomi Redmi Note 14 Pro",
     "employeeId": null,
     "assetType": "smartphone",
-    "assetSN": "RWNS9IB4NE",
+    "assetSN": "CAY7ERCIG6",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000010"
-  },
-  {
-    "id": 10,
-    "assetModel": "Xiaomi Redmi Note 14 Pro",
-    "employeeId": null,
-    "assetType": "smartphone",
-    "assetSN": "3C723P904V",
-    "assetStatus": "inStock",
-    "assetInvenrotyNumber": "1000011"
   }
 ]

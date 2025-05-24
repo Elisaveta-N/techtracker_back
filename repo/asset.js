@@ -59,4 +59,26 @@ const getAssets = async (condition) => {
   }
 };
 
-module.exports = { getAssets, getAsset };
+const createAsset = async (asset) => {
+  try {
+    // const asset2 = {
+    //     "assetModel": "HP ProDesk 400 G7 MT",
+
+    //     "assetType": "computer",
+    //     "assetSN": "TURU1Z6ARQ",
+    //     "assetStatus": "inStock",
+    //     "assetInvenrotyNumber": "kjesdghfidshgfi"
+    // }
+    const dbAssets = await prisma.asset.create({ data: asset });
+
+    if (dbAssets === null) {
+      return null;
+    }
+    return reportStatus(201, dbAssets);
+  } catch (err) {
+    console.log("createAsset error: " + err.message);
+    return reportStatus(500, { message: err.message });
+  }
+};
+
+module.exports = { getAssets, getAsset, createAsset};

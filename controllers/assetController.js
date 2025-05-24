@@ -1,4 +1,4 @@
-const { getAssets, getAsset } = require("../repo/asset");
+const { getAssets, getAsset, createAsset } = require("../repo/asset");
 const {getEmployees, getEmployee} = require('../repo/employee')
 
 const getAssetById = async function (req, res) {
@@ -56,4 +56,19 @@ const getAllAssets = async function (req, res) {
   return res.status(dbRes.code).json(dbRes.data);
 };
 
-module.exports = { getAssetById, getAssetByEmployeeId, getAllAssets, getAssetByDepartmentId };
+const postAsset = async function (req, res) {
+  const asset = req.body.asset;
+  if(asset === null) {
+    return res.status(400).json({ message: `Assets not specified` });
+  }
+
+  let dbRes = await getAssets({where: { assetInvenrotyNumber: asset.assetInvenrotyNumber }});
+  if(dbRes.data.length !== 0) {
+    return res.status(409).json({ message: `Asset should have unique inventory number` });
+  }
+
+  dbRes = await createAsset(asset);
+  return res.status(dbRes.code).json(dbRes.data);
+};
+
+module.exports = { getAssetById, getAssetByEmployeeId, getAllAssets, getAssetByDepartmentId, postAsset};

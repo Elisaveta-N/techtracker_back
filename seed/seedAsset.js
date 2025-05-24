@@ -33,7 +33,7 @@ function generateAssets(batchSize) {
     for (let i = 0; i < batchSize; ++i) {
       const sn = generateSN();
       const row = {
-        id: id++,
+        // id: id++,
         assetModel: item.assetModel,
         employeeId: null,
         assetType: item.assetType,
@@ -42,6 +42,7 @@ function generateAssets(batchSize) {
         assetInvenrotyNumber: (1000000 + id).toString(),
       };
       data.push(row);
+      id++;
     }
   });
 

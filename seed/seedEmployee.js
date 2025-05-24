@@ -4,13 +4,13 @@ const fs = require("fs/promises");
 
 const initEmployeeData = [
   {
-    id: 1,
+    // id: 1,
     firstName: "Петр",
     lastName: "Смирнов",
     departmentId: 1,
   },
   {
-    id: 2,
+    // id: 2,
     firstName: "Дмитрий",
     lastName: "Волков",
     departmentId: 1,

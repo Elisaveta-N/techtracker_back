@@ -14,6 +14,7 @@ router.route('/department/:id')
     .get(assetController.getAssetByDepartmentId)
 
 router.route('/')
-    .get(assetController.getAllAssets)    
+    .get(assetController.getAllAssets)
+    .post(assetController.postAsset)   
 
 module.exports = router
