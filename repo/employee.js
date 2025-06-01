@@ -58,4 +58,18 @@ const getEmployees = async (condition) => {
   }
 };
 
-module.exports = { getEmployees, getEmployee };
+const getFirstEmployee = async (condition) => {
+  try {
+    const dbEmployee = await prisma.employee.findFirst(condition);
+
+    if (dbEmployee === null) {
+      return null;
+    }
+    return reportStatus(200, dbEmployee);
+  } catch (err) {
+    console.log("getFirstEmployee error: " + err.message);
+    return reportStatus(500, { message: err.message });
+  }
+};
+
+module.exports = { getEmployees, getEmployee, getFirstEmployee };

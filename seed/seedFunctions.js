@@ -42,7 +42,7 @@ async function importData(fileName, tableName) {
       });
       console.log(`Imported ${result.count} records`);
     } else {
-      await prisma.department.create({
+      await Model.create({
         data: data,
       });
       console.log("✅ Record imported successfully");

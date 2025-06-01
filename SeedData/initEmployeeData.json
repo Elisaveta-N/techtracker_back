@@ -1,12 +1,32 @@
 [
   {
-    "firstName": "Петр",
-    "lastName": "Смирнов",
+    "firstName": "Лев",
+    "lastName": "Болдырев",
     "departmentId": 1
   },
   {
-    "firstName": "Дмитрий",
-    "lastName": "Волков",
+    "firstName": "Иван",
+    "lastName": "Герасимов",
     "departmentId": 1
+  },
+  {
+    "firstName": "Екатерина",
+    "lastName": "Шарова",
+    "departmentId": 2
+  },
+  {
+    "firstName": "София",
+    "lastName": "Белова",
+    "departmentId": 2
+  },
+  {
+    "firstName": "Ульяна",
+    "lastName": "Макарова",
+    "departmentId": 3
+  },
+  {
+    "firstName": "Мария",
+    "lastName": "Овсянникова",
+    "departmentId": 3
   }
 ]

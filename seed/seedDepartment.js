@@ -7,10 +7,10 @@ const initDepartmentData = [
     depName: "Отдел ИТ",
   },
   {
-    depName: "Бухгалтерия",
+    depName: "Отдел финансов",
   },
   {
-    depName: "Отдел Снабжения",
+    depName: "Бухгалтерия",
   },
 ];
 

@@ -2,7 +2,7 @@
   "name": "lesson01",
   "version": "1.0.0",
   "description": "Node.js Express tutorial",
-  "main": "server.js",
+  "main": "seed.js",
   "scripts": {
     "start": "node server",
     "dev": "nodemon server"

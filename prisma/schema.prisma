@@ -20,6 +20,7 @@ model User{
   password String
   refreshToken String @default("")
   roles Role[] @default([USER])
+  employee Employee?
 }
 
 model Employee{
@@ -29,6 +30,8 @@ model Employee{
   asset Asset[]
   department Department @relation(fields: [departmentId], references: [id])
   departmentId Int
+  user User? @relation(fields: [userId], references: [id])
+  userId Int? @unique 
 }
 
 model Department{
