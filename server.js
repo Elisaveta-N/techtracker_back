@@ -52,8 +52,9 @@ app.use('/test', require('./routes/test'))
 
 
 
-app.use(verifyJWT)
 
+app.use(verifyJWT)
+app.use('/user', require('./routes/user'))
 
 // app.all('/{*splat}', (req, res)=>{
 app.all('*splat', (req, res)=>{

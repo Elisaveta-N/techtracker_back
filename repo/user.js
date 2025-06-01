@@ -2,9 +2,9 @@ const prisma = require("../lib/prisma");
 const { reportStatus } = require("../lib/functions");
 
 const RoleEnum = {
-  ADMIN: 5150,
-  USER: 2001,
-  EDITOR: 1984,
+  ADMIN: 'ADMIN',
+  USER: 'USER',
+  MANAGER: 'MANAGER',
 };
 
 const adjustRoles = (dbUser) => {
@@ -112,10 +112,26 @@ const updateUser = async (id, data) => {
   return null;
 };
 
+const findUser = async (condition) => {
+  try {
+    const dbUser = await prisma.user.findFirst(condition);
+
+    if (dbUser) {
+      adjustRoles(dbUser);
+    }
+
+    return dbUser;
+  } catch (err) {
+    console.log("updateUser: " + err.message);
+  }
+  return null;
+};
+
 module.exports = {
   findUserByUsername,
   findUserById,
   createDbUser,
   findUserByToken,
   updateUser,
+  findUser,
 };

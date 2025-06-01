@@ -28,8 +28,14 @@ const handleLoginDb = async function (req, res) {
             process.env.ACCESS_TOKEN_SECRET,
             {expiresIn: "300s"}
         )
+
         const refreshToken = jwt.sign(
-            {"username": foundUser.username},
+            {
+                "UserInfo": {
+                "username": foundUser.username,
+                "role": Object.values(foundUser.roles)[0],
+                }
+            },
             process.env.REFRESH_TOKEN_SECRET,
             {expiresIn: "1d"}
         )
