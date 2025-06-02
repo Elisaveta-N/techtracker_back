@@ -52,4 +52,14 @@ const patchDepartment = async (department) => {
   }
 };
 
-module.exports = { getDepartments, getDepartment, createDepartment, patchDepartment};
+const deleteDepartment = async (id) => {
+  try {
+    const dbDepartment = await prisma.department.delete({where: id});
+    return reportStatus(204, dbDepartment);
+  } catch (err) {
+    console.log("deleteDepartment  error: " + err.message);
+    return reportStatus(500, { message: err.message });
+  }
+};
+
+module.exports = { getDepartments, getDepartment, createDepartment, patchDepartment, deleteDepartment};

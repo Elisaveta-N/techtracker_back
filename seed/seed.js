@@ -4,9 +4,8 @@ const { seedEmployee } = require("./seedEmployee");
 const { seedStructure } = require("./seedStructure");
 const { seedUser } = require("./seedUser");
 
-// DELETE FROM public."Asset";
-// DELETE FROM public."Employee";
-// DELETE FROM public."Department";
+// npx prisma migrate reset
+// node .\seed\seed.js
 
 // создаем начальную структуру как указано ниже, пароль для всех пользователей "pass"
 // Отдел ИТ
@@ -20,17 +19,6 @@ const { seedUser } = require("./seedUser");
 // Бухгалтерия
 // Макарова Ульяна MANAGER UMAK
 // Овсянникова Мария USER MOVS
-
-// seedAsset(2).then(() => {
-//   seedDepartment().then(() => {
-//     seedEmployee().then(() => {
-//       console.log("Initial data generation completed");
-//       seedStructure().then(()=>{
-//         // console.log("seedStructure() completed");
-//       })
-//     });
-//   });
-// });
 
 seedAsset(2).then(() => {
   seedDepartment().then(() => {

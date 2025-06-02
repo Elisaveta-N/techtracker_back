@@ -3,6 +3,7 @@ const {
   getDepartment,
   createDepartment,
   patchDepartment,
+  deleteDepartment,
 } = require("../repo/department");
 
 const getDepartmentById = async function (req, res) {
@@ -75,9 +76,23 @@ const changeDepartment = async function (req, res) {
   return res.status(dbRes.code).json(dbRes.data);
 };
 
+const removeDepartment = async function (req, res) {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    return res
+      .status(400)
+      .json({ message: "Department id should be a number" });
+  }
+
+  const dbRes = await deleteDepartment(id)
+  return res.status(dbRes.code).json(dbRes.data);
+}
+
+
 module.exports = {
   getDepartmentById,
   getAllDepartments,
   changeDepartment,
   postDepartment,
+  removeDepartment,
 };

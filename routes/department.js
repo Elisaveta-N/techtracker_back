@@ -7,6 +7,7 @@ const departmentController = require('../controllers/departmentController')
 router.route('/:id')
     .get(departmentController.getDepartmentById)
     .patch(departmentController.changeDepartment)
+    .delete(departmentController.removeDepartment)
 
 router.route('/')
     .get(departmentController.getAllDepartments)
