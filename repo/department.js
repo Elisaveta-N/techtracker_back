@@ -54,7 +54,7 @@ const patchDepartment = async (department) => {
 
 const deleteDepartment = async (id) => {
   try {
-    const dbDepartment = await prisma.department.delete({where: id});
+    const dbDepartment = await prisma.department.delete({where: {id}});
     return reportStatus(204, dbDepartment);
   } catch (err) {
     console.log("deleteDepartment  error: " + err.message);
