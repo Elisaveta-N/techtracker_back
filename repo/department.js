@@ -61,5 +61,18 @@ const deleteDepartment = async (id) => {
     return reportStatus(500, { message: err.message });
   }
 };
+const createEmployee = async (employee) => {
+  try {
+    const dbEmployee = await prisma.employee.create({ data: employee });
 
-module.exports = { getDepartments, getDepartment, createDepartment, patchDepartment, deleteDepartment};
+    if (dbEmployee === null) {
+      return reportStatus(500, { message: "Something went wrong, couldn't create an employee" });
+    }
+    return reportStatus(201, dbEmployee);
+  } catch (err) {
+    console.log("createEmployee error: " + err.message);
+    return reportStatus(500, { message: err.message });
+  }
+};
+
+module.exports = { createEmployee, getDepartments, getDepartment, createDepartment, patchDepartment, deleteDepartment};

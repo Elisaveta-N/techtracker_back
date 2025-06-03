@@ -10,4 +10,10 @@ router.route('/:id')
 router.route('/department/:id')
     .get(employeeController.getEmployeeByDepartmentId)
 
+router.route('/')
+    .get(employeeController.getEmployeesDto)
+    .post(employeeController.postEmployee)
+
+
+
 module.exports = router
