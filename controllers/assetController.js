@@ -151,7 +151,9 @@ const getAssetByIdDto = async function (req, res) {
     assetInventoryNumber: dbRes.data.assetInvenrotyNumber,
   };
   if (dbRes.data.employee) {
-    dto["employee"] = `${dbRes.data.employee.firstName} ${dbRes.data.employee.lastName}`;
+    dto[
+      "employee"
+    ] = `${dbRes.data.employee.firstName} ${dbRes.data.employee.lastName}`;
     dto["employeeId"] = dbRes.data.employee.id.toString();
     dto["departmentId"] = dbRes.data.employee.departmentId.toString();
   }
@@ -159,7 +161,49 @@ const getAssetByIdDto = async function (req, res) {
   return res.status(dbRes.code).json(dto);
 };
 
+const postAssetDto = async function (req, res) {
+  const asset = req.body.asset;
+  if (asset === null) {
+    return res.status(400).json({ message: `Assets not specified` });
+  }
+
+  let dbRes = await getAssets({
+    where: { assetInvenrotyNumber: asset.assetInvenrotyNumber },
+  });
+  if (dbRes.data.length !== 0) {
+    return res
+      .status(409)
+      .json({ message: `Asset should have unique inventory number` });
+  }
+
+  if(!asset.employeeId) {
+    delete asset.employeeId;
+  }
+
+  dbRes = await createAsset(asset);
+  if (dbRes.code === 201) {
+    let dto = {
+      id: dbRes.data.id.toString(),
+      assetModel: dbRes.data.assetModel,
+      assetType: dbRes.data.assetType,
+      assetSN: dbRes.data.assetSN,
+      assetStatus: dbRes.data.assetStatus,
+      assetInventoryNumber: dbRes.data.assetInvenrotyNumber,
+    };
+    if (dbRes.data.employeeId) {      
+      const dbRes2 = await getAsset({ where: { id: dbRes.data.employeeId }, include: {employee: true, }, });
+      dto["employee"] = `${dbRes2.data.employee.firstName} ${dbRes2.data.employee.lastName}`;
+      dto["employeeId"] = dbRes2.data.employee.id.toString();
+      dto["departmentId"] = dbRes2.data.employee.departmentId.toString();
+    }
+    return res.status(dbRes.code).json(dto);
+  }
+
+  return res.status(dbRes.code).json(dbRes.data);
+};
+
 module.exports = {
+  postAssetDto,
   getAssetByIdDto,
   getAllAssetsDto,
   getAssetById,

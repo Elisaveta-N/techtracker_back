@@ -16,7 +16,7 @@ router.route('/department/:id')
 
 router.route('/')
     .get(assetController.getAllAssetsDto)
-    .post(assetController.postAsset)   
+    .post(assetController.postAssetDto)   
 
     
 
