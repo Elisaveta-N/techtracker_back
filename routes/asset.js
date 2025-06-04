@@ -5,7 +5,7 @@ const assetController = require('../controllers/assetController')
 
 
 router.route('/:id')
-    .get(assetController.getAssetById)
+    .get(assetController.getAssetByIdDto)
     .patch(assetController.changeAsset)
 
 router.route('/employee/:id')
@@ -15,7 +15,7 @@ router.route('/department/:id')
     .get(assetController.getAssetByDepartmentId)
 
 router.route('/')
-    .get(assetController.getAllAssets)
+    .get(assetController.getAllAssetsDto)
     .post(assetController.postAsset)   
 
     
