@@ -2,6 +2,8 @@ const {
   getEmployees,
   getEmployee,
   createEmployee,
+  deleteEmployee,
+  patchEmployee,
 } = require("../repo/employee");
 
 const getEmployeeById = async function (req, res) {
@@ -79,9 +81,9 @@ const postEmployee = async function (req, res) {
       departmentId: parseInt(employee.departmentId),
     };
     dbRes = await createEmployee(emp_dto);
-    if(dbRes.code === 201) {
-        dbRes.data.id = dbRes.data.id.toString();
-        dbRes.data.departmentId = dbRes.data.departmentId.toString();
+    if (dbRes.code === 201) {
+      dbRes.data.id = dbRes.data.id.toString();
+      dbRes.data.departmentId = dbRes.data.departmentId.toString();
     }
     return res.status(dbRes.code).json(dbRes.data);
   } catch (err) {
@@ -89,9 +91,53 @@ const postEmployee = async function (req, res) {
   }
 };
 
+const removeEmployee = async function (req, res) {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    return res.status(400).json({ message: "Employee id should be a number" });
+  }
+
+  const dbRes = await deleteEmployee(id);
+  return res.status(dbRes.code).json(dbRes.data);
+};
+
+const changeEmployee = async function (req, res) {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    return res.status(400).json({ message: "Employee id should be a number" });
+  }
+
+  let dbRes = await getEmployee({ where: { id } });
+  if (dbRes === null) {
+    return res.status(400).json({ message: `Employee ID ${id} not found` });
+  }
+
+  let employee = req.body.employee;
+  if (employee === null) {
+    return res.status(400).json({ message: `Employees not specified` });
+  }
+
+  const emp_dto = {
+    id: id,
+    firstName: employee.firstName,
+    lastName: employee.lastName,
+    departmentId: parseInt(employee.departmentId),
+  };
+
+  dbRes = await patchEmployee(emp_dto);
+  if (dbRes.code === 200) {
+    dbRes.data.id = dbRes.data.id.toString();
+    dbRes.data.departmentId = dbRes.data.departmentId.toString();
+  }
+
+  return res.status(dbRes.code).json(dbRes.data);
+};
+
 module.exports = {
   getEmployeeById,
   getEmployeeByDepartmentId,
   getEmployeesDto,
   postEmployee,
+  removeEmployee,
+  changeEmployee,
 };

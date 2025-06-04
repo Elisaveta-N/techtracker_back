@@ -88,6 +88,28 @@ const removeDepartment = async function (req, res) {
   return res.status(dbRes.code).json(dbRes.data);
 }
 
+const changeEmployee = async function (req, res) {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    return res
+      .status(400)
+      .json({ message: "Employee id should be a number" });
+  }
+
+  let dbRes = await getEmployee({ where: { id } });
+  if (dbRes === null) {
+    return res.status(400).json({ message: `Employee ID ${id} not found` });
+  }
+
+  let employee = req.body.employee;
+  if (employee === null) {
+    return res.status(400).json({ message: `Employees not specified` });
+  }
+
+  employee.id = id;
+  dbRes = await patchEmployee(employee);
+  return res.status(dbRes.code).json(dbRes.data);
+};
 
 module.exports = {
   getDepartmentById,
@@ -95,4 +117,5 @@ module.exports = {
   changeDepartment,
   postDepartment,
   removeDepartment,
+  changeEmployee,
 };

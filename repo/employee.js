@@ -86,4 +86,25 @@ const createEmployee = async (employee) => {
   }
 };
 
-module.exports = { createEmployee, getEmployees, getEmployee, getFirstEmployee };
+const deleteEmployee = async (id) => {
+  try {
+    const dbEmployee = await prisma.employee.delete({where: {id}});
+    return reportStatus(204, dbEmployee);
+  } catch (err) {
+    console.log("deleteEmployee  error: " + err.message);
+    return reportStatus(500, { message: err.message });
+  }
+};
+
+const patchEmployee = async (employee) => {
+  try {
+    const dbEmployee = await prisma.employee.update({where: {id: employee.id,}, data: employee,});
+    return reportStatus(200, dbEmployee);
+  } catch (err) {
+    console.log("patchEmployee error: " + err.message);
+    return reportStatus(500, { message: err.message });
+  }
+};
+
+
+module.exports = {patchEmployee, createEmployee, getEmployees, getEmployee, getFirstEmployee, deleteEmployee};

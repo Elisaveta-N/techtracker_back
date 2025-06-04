@@ -6,6 +6,8 @@ const employeeController = require('../controllers/employeeController')
 
 router.route('/:id')
     .get(employeeController.getEmployeeById)
+    .delete(employeeController.removeEmployee)
+    .patch(employeeController.changeEmployee)
 
 router.route('/department/:id')
     .get(employeeController.getEmployeeByDepartmentId)
