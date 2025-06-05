@@ -217,6 +217,60 @@ const removeAsset = async function (req, res) {
   return res.status(dbRes.code).json(dbRes.data);
 }
 
+const changeAssetDto = async function (req, res) {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    return res.status(400).json({ message: "Asset id should be a number" });
+  }
+
+  let dbRes = await getAsset({ where: { id } });
+  if (dbRes === null) {
+    return res.status(400).json({ message: `Asset ID ${id} not found` });
+  }
+
+  if (req.body.asset === null) {
+    return res.status(400).json({ message: `Assets not specified` });
+  }
+
+  let dto = {}
+  dto.id = id;
+  dto.assetModel = req.body.asset.assetModel;
+  dto.assetType = req.body.asset.assetType;
+  dto.assetStatus = req.body.asset.assetStatus;
+  dto.assetInvenrotyNumber = req.body.asset.assetInventoryNumber;
+  if(req.body.asset.employeeId) {
+    dto.employeeId = parseInt(req.body.asset.employeeId)
+  } else {
+    dto.employeeId = null
+  }
+  if(req.body.asset. assetSN) {
+    dto. assetSN = req.body.asset. assetSN
+  }
+
+
+  dbRes = await patchAsset(dto);
+
+  if(dbRes.code.status === 200) {
+      let dto = {
+      id: dbRes.data.id.toString(),
+      assetModel: dbRes.data.assetModel,
+      assetType: dbRes.data.assetType,
+      assetSN: dbRes.data.assetSN,
+      assetStatus: dbRes.data.assetStatus,
+      assetInventoryNumber: dbRes.data.assetInvenrotyNumber,
+    };
+    if (dbRes.data.employeeId) {      
+      const dbRes2 = await getAsset({ where: { id: dbRes.data.id }, include: {employee: true, }, });
+      dto["employee"] = `${dbRes2.data.employee.firstName} ${dbRes2.data.employee.lastName}`;
+      dto["employeeId"] = dbRes2.data.employee.id.toString();
+      dto["departmentId"] = dbRes2.data.employee.departmentId.toString();
+    }
+    return res.status(dbRes.code).json(dto);  
+  }
+
+  return res.status(dbRes.code).json(dbRes.data);
+};
+
 
 module.exports = {
   postAssetDto,
@@ -229,4 +283,5 @@ module.exports = {
   postAsset,
   changeAsset,
   removeAsset,
+  changeAssetDto,
 };
