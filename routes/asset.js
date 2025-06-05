@@ -7,6 +7,7 @@ const assetController = require('../controllers/assetController')
 router.route('/:id')
     .get(assetController.getAssetByIdDto)
     .patch(assetController.changeAsset)
+    .delete(assetController.removeAsset)
 
 router.route('/employee/:id')
     .get(assetController.getAssetByEmployeeId)

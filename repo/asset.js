@@ -52,4 +52,15 @@ const patchAsset = async (asset) => {
   }
 };
 
-module.exports = { getAssets, getAsset, createAsset, patchAsset};
+const deleteAsset = async (id) => {
+  try {
+    const dbAsset = await prisma.asset.delete({where: {id}});
+    return reportStatus(204, dbAsset);
+  } catch (err) {
+    console.log("deleteAsset  error: " + err.message);
+    return reportStatus(500, { message: err.message });
+  }
+};
+
+
+module.exports = {deleteAsset, getAssets, getAsset, createAsset, patchAsset};

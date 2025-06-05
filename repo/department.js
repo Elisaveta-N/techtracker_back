@@ -62,4 +62,5 @@ const deleteDepartment = async (id) => {
   }
 };
 
+
 module.exports = { getDepartments, getDepartment, createDepartment, patchDepartment, deleteDepartment};

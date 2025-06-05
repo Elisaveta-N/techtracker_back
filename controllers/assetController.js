@@ -4,6 +4,7 @@ const {
   getAsset,
   createAsset,
   patchAsset,
+  deleteAsset,
 } = require("../repo/asset");
 const { getEmployees, getEmployee } = require("../repo/employee");
 
@@ -204,6 +205,19 @@ const postAssetDto = async function (req, res) {
   return res.status(dbRes.code).json(dbRes.data);
 };
 
+const removeAsset = async function (req, res) {
+  const id = parseInt(req.params.id);
+  if (isNaN(id)) {
+    return res
+      .status(400)
+      .json({ message: "Asset id should be a number" });
+  }
+
+  const dbRes = await deleteAsset(id)
+  return res.status(dbRes.code).json(dbRes.data);
+}
+
+
 module.exports = {
   postAssetDto,
   getAssetByIdDto,
@@ -214,4 +228,5 @@ module.exports = {
   getAssetByDepartmentId,
   postAsset,
   changeAsset,
+  removeAsset,
 };
