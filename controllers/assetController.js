@@ -178,6 +178,8 @@ const postAssetDto = async function (req, res) {
 
   if(!asset.employeeId) {
     delete asset.employeeId;
+  } else {
+    asset.employeeId = parseInt(asset.employeeId);
   }
 
   dbRes = await createAsset(asset);
@@ -191,7 +193,7 @@ const postAssetDto = async function (req, res) {
       assetInventoryNumber: dbRes.data.assetInvenrotyNumber,
     };
     if (dbRes.data.employeeId) {      
-      const dbRes2 = await getAsset({ where: { id: dbRes.data.employeeId }, include: {employee: true, }, });
+      const dbRes2 = await getAsset({ where: { id: dbRes.data.id }, include: {employee: true, }, });
       dto["employee"] = `${dbRes2.data.employee.firstName} ${dbRes2.data.employee.lastName}`;
       dto["employeeId"] = dbRes2.data.employee.id.toString();
       dto["departmentId"] = dbRes2.data.employee.departmentId.toString();
