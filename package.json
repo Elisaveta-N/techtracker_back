@@ -1,13 +1,13 @@
 {
-  "name": "lesson01",
+  "name": "ttb",
   "version": "1.0.0",
-  "description": "Node.js Express tutorial",
+  "description": "TechTrackr backend",
   "main": "server.js",
   "scripts": {
     "start": "node server",
     "dev": "nodemon server"
   },
-  "author": "Dave Gray",
+  "author": "Liza Nickonova",
   "license": "ISC",
   "dependencies": {
     "@prisma/client": "^6.7.0",
