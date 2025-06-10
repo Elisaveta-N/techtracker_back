@@ -5,6 +5,7 @@ const {
   deleteEmployee,
   patchEmployee,
 } = require("../repo/employee");
+const { findUser } = require("../repo/user");
 
 const getEmployeeById = async function (req, res) {
   const id = parseInt(req.params.id);
@@ -44,12 +45,33 @@ const getEmployeeByDepartmentId = async function (req, res) {
 };
 
 const getEmployeesDto = async function (req, res) {
-  const dbRes = await getEmployees({});
-  if (dbRes === null) {
+  let dbEmployee = null
+    if (req.roles === "ADMIN") {
+    dbEmployee = await getEmployees({});
+  } else if (req.roles === "MANAGER") {
+    const dbUser = await findUser({
+      where: { username: req.user },
+      include: { employee: true },
+    });
+    if (dbUser === null) {
+      return res
+        .status(400)
+        .json({ message: `User name: ${req.user} not found` });
+    }
+    dbEmployee = await getEmployees({
+      where: {
+        departmentId: dbUser.employee.departmentId,
+      },
+    });
+  }
+
+
+  
+  if (dbEmployee === null) {
     return res.status(400).json({ message: `Employees not found` });
   }
 
-  const dto = dbRes.data.map((emp) => {
+  const dto = dbEmployee.data.map((emp) => {
     return {
       id: emp.id.toString(),
       firstName: emp.firstName,
@@ -58,7 +80,7 @@ const getEmployeesDto = async function (req, res) {
     };
   });
 
-  return res.status(dbRes.code).json(dto);
+  return res.status(dbEmployee.code).json(dto);
 };
 
 const postEmployee = async function (req, res) {
