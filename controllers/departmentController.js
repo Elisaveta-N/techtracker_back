@@ -5,6 +5,7 @@ const {
   patchDepartment,
   deleteDepartment,
 } = require("../repo/department");
+const { findUser } = require("../repo/user");
 
 const getDepartmentById = async function (req, res) {
   const id = parseInt(req.params.id);
@@ -21,19 +22,39 @@ const getDepartmentById = async function (req, res) {
 };
 
 const getAllDepartments = async function (req, res) {
-  const dbRes = await getDepartments({});
-  if (dbRes === null) {
+  let dbDepartment = null;
+  if (req.roles === "ADMIN") {
+    dbDepartment = await getDepartments({});
+  } else if (req.roles === "MANAGER") {
+    const dbUser = await findUser({
+      where: { username: req.user },
+      include: { employee: true },
+    });
+    if (dbUser === null) {
+      return res
+        .status(400)
+        .json({ message: `User name: ${req.user} not found` });
+    }
+
+    dbDepartment = await getDepartments({
+      where: {
+        id: dbUser.employee.departmentId,
+      },
+    });
+  }
+
+  if (dbDepartment === null) {
     return res.status(500).json({ message: `Departments not found` });
   }
 
-  if (dbRes.code === 200) {
-    dbRes.data.forEach((obj) => {
+  if (dbDepartment.code === 200) {
+    dbDepartment.data.forEach((obj) => {
       obj.id = obj.id.toString();
       obj.name = obj.depName;
       delete obj.depName;
     });
   }
-  return res.status(dbRes.code).json(dbRes.data);
+  return res.status(dbDepartment.code).json(dbDepartment.data);
 };
 
 const postDepartment = async function (req, res) {
@@ -84,16 +105,14 @@ const removeDepartment = async function (req, res) {
       .json({ message: "Department id should be a number" });
   }
 
-  const dbRes = await deleteDepartment(id)
+  const dbRes = await deleteDepartment(id);
   return res.status(dbRes.code).json(dbRes.data);
-}
+};
 
 const changeEmployee = async function (req, res) {
   const id = parseInt(req.params.id);
   if (isNaN(id)) {
-    return res
-      .status(400)
-      .json({ message: "Employee id should be a number" });
+    return res.status(400).json({ message: "Employee id should be a number" });
   }
 
   let dbRes = await getEmployee({ where: { id } });
