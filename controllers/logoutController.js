@@ -8,12 +8,14 @@ const handleLogoutDb = async function (req, res) {
     if(!cookies?.jwt) return res.sendStatus(204) //No content
 
     const refreshToken = cookies.jwt
+    res.clearCookie('jwt', refreshToken, {httpOnly: true, sameSite: 'None', secure: true, maxAge: 24*60*60*1000})
+
 
     //Is refresh token in DB?
     const foundUser = await findUserByToken(refreshToken)
     if(!foundUser){
         // res.clearCookie('jwt', refreshToken, {httpOnly: true, sameSite: 'None', secure: true, maxAge: 24*60*60*1000})
-        res.clearCookie('jwt')
+
         return res.sendStatus(204)
     } 
 
@@ -24,7 +26,6 @@ const handleLogoutDb = async function (req, res) {
     }
 
     // res.clearCookie('jwt', refreshToken, {httpOnly: true, sameSite: 'None', secure: true, maxAge: 24*60*60*1000})
-    res.clearCookie('jwt')
     return res.sendStatus(204)
 }
 
