@@ -12,7 +12,7 @@ const handleLogoutDb = async function (req, res) {
     //Is refresh token in DB?
     const foundUser = await findUserByToken(refreshToken)
     if(!foundUser){
-        res.clearCookie('jwt', refreshToken, {httpOnly: true, sameSite: 'None', secure: true})
+        res.clearCookie('jwt', refreshToken, {httpOnly: true, sameSite: 'None', secure: true, maxAge: 24*60*60*1000})
         return res.sendStatus(204)
     } 
 
@@ -22,7 +22,7 @@ const handleLogoutDb = async function (req, res) {
         console.error('Failed to update refreshToken in the database')
     }
 
-    res.clearCookie('jwt', refreshToken, {httpOnly: true, sameSite: 'None', secure: true})
+    res.clearCookie('jwt', refreshToken, {httpOnly: true, sameSite: 'None', secure: true, maxAge: 24*60*60*1000})
     return res.sendStatus(204)
 }
 
