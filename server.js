@@ -46,7 +46,7 @@ app.use('/refresh', require('./routes/refresh'))
 app.use('/logout', require('./routes/logout'))
 
 app.use('/employee', require('./routes/employee'))
-app.use('/asset', require('./routes/asset'))
+
 app.use('/department', require('./routes/department'))
 app.use('/test', require('./routes/test'))
 
@@ -55,6 +55,7 @@ app.use('/test', require('./routes/test'))
 
 app.use(verifyJWT)
 app.use('/user', require('./routes/user'))
+app.use('/asset', require('./routes/asset'))
 
 // app.all('/{*splat}', (req, res)=>{
 app.all('*splat', (req, res)=>{

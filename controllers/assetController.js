@@ -6,6 +6,7 @@ const {
   patchAsset,
   deleteAsset,
 } = require("../repo/asset");
+const { findUser } = require("../repo/user");
 const { getEmployees, getEmployee } = require("../repo/employee");
 
 const getAssetById = async function (req, res) {
@@ -42,7 +43,7 @@ const getAssetByDepartmentId = async function (req, res) {
       .json({ message: "Department id should be a number" });
   }
   const dbRes = await getEmployees({
-    where: { departmentId: 1 },
+    where: { departmentId: id },
     include: {
       asset: true, // Include the assets related to this user
     },
@@ -104,16 +105,55 @@ const changeAsset = async function (req, res) {
 };
 
 const getAllAssetsDto = async function (req, res) {
-  const dbRes = await getAssets({
-    include: {
-      employee: true,
-    },
-  });
-  if (dbRes === null) {
+  let dbAssets = null;
+
+  if (req.roles === "ADMIN") {
+    dbAssets = await getAssets({
+      include: {
+        employee: true,
+      },
+    });
+  } else {
+    const dbUser = await findUser({
+      where: { username: req.user },
+      include: { employee: true },
+    });
+    if (dbUser === null) {
+      return res
+        .status(400)
+        .json({ message: `User name: ${req.user} not found` });
+    }
+
+    if (req.roles === "MANAGER") {
+      dbAssets = await getAssets({
+        include: {
+          employee: true,
+        },
+        where: {
+          employee: {
+            departmentId: dbUser.employee.departmentId,
+          },
+        },
+      });
+    } else {
+      dbAssets = await getAssets({
+        include: {
+          employee: true,
+        },
+        where: {
+          employee: {
+            id: dbUser.employee.id,
+          },
+        },
+      });
+    }
+  }
+
+  if (dbAssets === null) {
     return res.status(500).json({ message: `Assets not found` });
   }
 
-  const dto = dbRes.data.map((a) => {
+  const dto = dbAssets.data.map((a) => {
     let ret = {
       id: a.id.toString(),
       assetModel: a.assetModel,
@@ -130,7 +170,7 @@ const getAllAssetsDto = async function (req, res) {
     return ret;
   });
 
-  return res.status(dbRes.code).json(dto);
+  return res.status(dbAssets.code).json(dto);
 };
 
 const getAssetByIdDto = async function (req, res) {
@@ -177,7 +217,7 @@ const postAssetDto = async function (req, res) {
       .json({ message: `Asset should have unique inventory number` });
   }
 
-  if(!asset.employeeId) {
+  if (!asset.employeeId) {
     delete asset.employeeId;
   } else {
     asset.employeeId = parseInt(asset.employeeId);
@@ -193,9 +233,14 @@ const postAssetDto = async function (req, res) {
       assetStatus: dbRes.data.assetStatus,
       assetInventoryNumber: dbRes.data.assetInvenrotyNumber,
     };
-    if (dbRes.data.employeeId) {      
-      const dbRes2 = await getAsset({ where: { id: dbRes.data.id }, include: {employee: true, }, });
-      dto["employee"] = `${dbRes2.data.employee.firstName} ${dbRes2.data.employee.lastName}`;
+    if (dbRes.data.employeeId) {
+      const dbRes2 = await getAsset({
+        where: { id: dbRes.data.id },
+        include: { employee: true },
+      });
+      dto[
+        "employee"
+      ] = `${dbRes2.data.employee.firstName} ${dbRes2.data.employee.lastName}`;
       dto["employeeId"] = dbRes2.data.employee.id.toString();
       dto["departmentId"] = dbRes2.data.employee.departmentId.toString();
     }
@@ -208,14 +253,12 @@ const postAssetDto = async function (req, res) {
 const removeAsset = async function (req, res) {
   const id = parseInt(req.params.id);
   if (isNaN(id)) {
-    return res
-      .status(400)
-      .json({ message: "Asset id should be a number" });
+    return res.status(400).json({ message: "Asset id should be a number" });
   }
 
-  const dbRes = await deleteAsset(id)
+  const dbRes = await deleteAsset(id);
   return res.status(dbRes.code).json(dbRes.data);
-}
+};
 
 const changeAssetDto = async function (req, res) {
   const id = parseInt(req.params.id);
@@ -232,26 +275,25 @@ const changeAssetDto = async function (req, res) {
     return res.status(400).json({ message: `Assets not specified` });
   }
 
-  let dto = {}
+  let dto = {};
   dto.id = id;
   dto.assetModel = req.body.asset.assetModel;
   dto.assetType = req.body.asset.assetType;
   dto.assetStatus = req.body.asset.assetStatus;
   dto.assetInvenrotyNumber = req.body.asset.assetInventoryNumber;
-  if(req.body.asset.employeeId) {
-    dto.employeeId = parseInt(req.body.asset.employeeId)
+  if (req.body.asset.employeeId) {
+    dto.employeeId = parseInt(req.body.asset.employeeId);
   } else {
-    dto.employeeId = null
+    dto.employeeId = null;
   }
-  if(req.body.asset. assetSN) {
-    dto. assetSN = req.body.asset. assetSN
+  if (req.body.asset.assetSN) {
+    dto.assetSN = req.body.asset.assetSN;
   }
-
 
   dbRes = await patchAsset(dto);
 
-  if(dbRes.code.status === 200) {
-      let dto = {
+  if (dbRes.code.status === 200) {
+    let dto = {
       id: dbRes.data.id.toString(),
       assetModel: dbRes.data.assetModel,
       assetType: dbRes.data.assetType,
@@ -259,18 +301,22 @@ const changeAssetDto = async function (req, res) {
       assetStatus: dbRes.data.assetStatus,
       assetInventoryNumber: dbRes.data.assetInvenrotyNumber,
     };
-    if (dbRes.data.employeeId) {      
-      const dbRes2 = await getAsset({ where: { id: dbRes.data.id }, include: {employee: true, }, });
-      dto["employee"] = `${dbRes2.data.employee.firstName} ${dbRes2.data.employee.lastName}`;
+    if (dbRes.data.employeeId) {
+      const dbRes2 = await getAsset({
+        where: { id: dbRes.data.id },
+        include: { employee: true },
+      });
+      dto[
+        "employee"
+      ] = `${dbRes2.data.employee.firstName} ${dbRes2.data.employee.lastName}`;
       dto["employeeId"] = dbRes2.data.employee.id.toString();
       dto["departmentId"] = dbRes2.data.employee.departmentId.toString();
     }
-    return res.status(dbRes.code).json(dto);  
+    return res.status(dbRes.code).json(dto);
   }
 
   return res.status(dbRes.code).json(dbRes.data);
 };
-
 
 module.exports = {
   postAssetDto,
