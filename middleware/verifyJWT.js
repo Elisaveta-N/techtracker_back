@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
+const {findUserByToken} = require('../repo/user')
 
 // const verifyJWT = (req, res, next) => {
 //     const authHeader = req.headers.authorization || req.headers.Authorization
@@ -22,6 +23,11 @@ const verifyJWT = (req, res, next) => {
     if (!cookies?.jwt) return res.sendStatus(401);
 
     const token = cookies.jwt;
+    const dbUser = findUserByToken(token)
+    if(dbUser === null) {
+        return res.sendStatus(401);
+    }
+
     jwt.verify(
         token,
         process.env.REFRESH_TOKEN_SECRET,
