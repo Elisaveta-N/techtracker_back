@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken')
 require('dotenv').config()
-const {findUserByToken} = require('../repo/user')
+// const {findUserByToken} = require('../repo/user')
 
 // const verifyJWT = (req, res, next) => {
 //     const authHeader = req.headers.authorization || req.headers.Authorization
@@ -18,13 +18,16 @@ const {findUserByToken} = require('../repo/user')
 //         }
 //     )
 // }
-const verifyJWT = (req, res, next) => {
+const verifyJWT = async (req, res, next) => {
     const cookies = req.cookies;
     if (!cookies?.jwt) return res.sendStatus(401);
 
     const token = cookies.jwt;
-    const dbUser = findUserByToken(token)
-    if(dbUser === null) {
+    // const dbUser = await findUserByToken(token)
+    // if(dbUser === null) {
+    //     return res.sendStatus(401);
+    // }
+    if(token === '') {
         return res.sendStatus(401);
     }
 
