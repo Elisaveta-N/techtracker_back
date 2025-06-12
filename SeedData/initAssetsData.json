@@ -3,7 +3,7 @@
     "assetModel": "HP ProDesk 400 G7 MT",
     "employeeId": null,
     "assetType": "computer",
-    "assetSN": "0VY8KI1BNF",
+    "assetSN": "FM9TWYQXVZ",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000001"
   },
@@ -11,7 +11,7 @@
     "assetModel": "HP ProDesk 400 G7 MT",
     "employeeId": null,
     "assetType": "computer",
-    "assetSN": "ZTW0I1GE2V",
+    "assetSN": "9Y7ZQZOMDX",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000002"
   },
@@ -19,7 +19,7 @@
     "assetModel": "HP EliteBook 840 G10",
     "employeeId": null,
     "assetType": "laptop",
-    "assetSN": "J9RMPQYTM3",
+    "assetSN": "4NPDTOTIRS",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000003"
   },
@@ -27,7 +27,7 @@
     "assetModel": "HP EliteBook 840 G10",
     "employeeId": null,
     "assetType": "laptop",
-    "assetSN": "N77MBI791D",
+    "assetSN": "XDYC6IF27E",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000004"
   },
@@ -35,7 +35,7 @@
     "assetModel": "HP USB-C G5",
     "employeeId": null,
     "assetType": "dockstation",
-    "assetSN": "6LF5KVII7I",
+    "assetSN": "3D0W2V9COB",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000005"
   },
@@ -43,7 +43,7 @@
     "assetModel": "HP USB-C G5",
     "employeeId": null,
     "assetType": "dockstation",
-    "assetSN": "Z5EN4PHE1O",
+    "assetSN": "W5B2YWKFHH",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000006"
   },
@@ -51,7 +51,7 @@
     "assetModel": "AOC Professional 27P2Q",
     "employeeId": null,
     "assetType": "monitor",
-    "assetSN": "N58VPAC1EV",
+    "assetSN": "ZNMMD1RWB2",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000007"
   },
@@ -59,7 +59,7 @@
     "assetModel": "AOC Professional 27P2Q",
     "employeeId": null,
     "assetType": "monitor",
-    "assetSN": "U5OR7EFKOQ",
+    "assetSN": "23G4KJ55AD",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000008"
   },
@@ -67,7 +67,7 @@
     "assetModel": "Xiaomi Redmi Note 14 Pro",
     "employeeId": null,
     "assetType": "smartphone",
-    "assetSN": "639J25AE7D",
+    "assetSN": "6WELKS1MNU",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000009"
   },
@@ -75,7 +75,7 @@
     "assetModel": "Xiaomi Redmi Note 14 Pro",
     "employeeId": null,
     "assetType": "smartphone",
-    "assetSN": "IXAZ6ESQ1O",
+    "assetSN": "U8DNQ0A4CS",
     "assetStatus": "inStock",
     "assetInvenrotyNumber": "1000010"
   }
