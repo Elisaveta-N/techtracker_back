@@ -5,7 +5,10 @@ const allowedOrigins = [
     'http://localhost:3000',
     'http://localhost:5173',
     'https://techtrackr.netlify.app',
-    'https://nodejs-web-server2.onrender.com'
+    'https://nodejs-web-server2.onrender.com',
+    'https://ltechtrack.netlify.app/',
+    'https://techtracker-back.onrender.com'
+    
 ];
 
 module.exports = allowedOrigins
