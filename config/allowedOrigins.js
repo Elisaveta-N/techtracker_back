@@ -6,7 +6,7 @@ const allowedOrigins = [
     'http://localhost:5173',
     'https://techtrackr.netlify.app',
     'https://nodejs-web-server2.onrender.com',
-    'https://ltechtrack.netlify.app/',
+    'https://ltechtrack.netlify.app',
     'https://techtracker-back.onrender.com'
     
 ];
